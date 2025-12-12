@@ -46,14 +46,10 @@ async def test_project(dut):
     await ClockCycles(dut.clk, 16)
 
     #SCK period #1:
-    val_a = dut.ui_in.value.integer
+    #val_a = dut.ui_in.value.integer
     #val_b = dut.signal_b.value.integer
-    result = val_a & MSK_SPI_CS_TO_OFF
+    result = dut.ui_in.value.integer & MSK_SPI_CS_TO_OFF
 
-    #signal_a = LogicArray(dut.ui_in.value)
-    #signal_b = LogicArray(MSK_SPI_CS_TO_OFF)  
-    #signal_c = LogicArray(MSK_SPI_MOSI_TO_OFF) 
-    #word =  dut.ui_in.value & signal_b & signal_c 
     dut.ui_in.value = result
     await ClockCycles(dut.clk, 1)
     ###SCK falling edge:
