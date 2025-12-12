@@ -4,7 +4,7 @@
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
-
+from cocotb.types import LogicArray, Logic
 
 @cocotb.test()
 async def test_project(dut):
@@ -46,10 +46,10 @@ async def test_project(dut):
     await ClockCycles(dut.clk, 16)
 
     #SCK period #1:
-     
-    word = dut.ui_in.value 
-    word = word & MSK_SPI_CS_TO_OFF & MSK_SPI_MOSI_TO_OFF
-    dut.ui_in.value = word #
+    signal_a = LogicArray(dut.ui_in.value)
+    #signal_b = LogicArray(MSK_SPI_CS_TO_OFF & MSK_SPI_MOSI_TO_OFF) 
+    #word =  signal_a & signal_b 
+    #dut.ui_in.value = word #
     await ClockCycles(dut.clk, 1)
     ###SCK falling edge:
     #dut.ui_in.value = dut.ui_in.value &  MSK_SPI_SCK_TO_OFF
