@@ -126,4 +126,56 @@ async def test_project(dut):
     dut.ui_in.value  = MSK_SPI_SCK_TO_ON | MSK_SPI_CS_TO_ON | MSK_SPI_MOSI_TO_ON
     await ClockCycles(dut.clk, 16)
 
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    # Sequence of ROM write SPI commands to store Post intructions
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    #
+    #    |-------------------------------|
+    #    |         2 Bytes SPI word      |
+    #    |-------------------------------|
+    #    | RW  |  Address  |     Data    |                                                        
+    #    | bit |   bits    |     bits    |                                                    
+    #    |-----|-----------|-------------|
+    #    | b15 | [b14:b04] |  [b03:b00]  |
+    #    |-----|-----------|-------------|
+    #    |  x  |xxxxxxxxxxx|    xxxx     |
+    #    |-----|-----------|-------------|
+    #
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    #     SPI 11 bits address map:
+    #
+    #     -----+-----------+----------
+    #     0x000|           |                                                                  
+    #          |  CPU ROM  |   SPI                                                              
+    #     0x0FF|           |   Code                                                          
+    #     -----|-----------|   space
+    #          |           |                                                             
+    #          | Reserved  |                                                             
+    #     0x3FF|           |                                                             
+    #     -----|-----------|---------
+    #     0x400|           |    
+    #          |  CPU RAM  |   SPI                                                              
+    #     0x4FF|           |   Data                                                          
+    #     -----|-----------|   space
+    #          |           |                                                             
+    #          | Reserved  |                                                             
+    #     0x7FF|           |                                                                 
+    #     -----|-----------|---------
+    #    
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    # Write STOP intruction (0x7) in loc 0x00 of CPU space code
+    # SPI command word: 0000000000000111 
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    #SCK period #1:
+    dut.ui_in.value = dut.ui_in.value.int &   MSK_SPI_CS_TO_OFF  &   MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.int &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.int |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+    
 
