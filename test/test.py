@@ -4,7 +4,7 @@
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
-from cocotb.types import LogicArray, Logic
+#from cocotb.types import LogicArray, Logic
 
 @cocotb.test()
 async def test_project(dut):
