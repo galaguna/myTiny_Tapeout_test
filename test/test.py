@@ -26,3 +26,21 @@ async def test_project(dut):
     dut._log.info("Test project behavior")
 
 
+    MSK_SPI_SCK_TO_ON = 0x08
+    MSK_SPI_SCK_TO_OFF = 0xF7
+    MSK_SPI_MOSI_TO_ON = 0x10
+    MSK_SPI_MOSI_TO_OFF = 0xEF
+    MSK_SPI_CS_TO_ON = 0x20
+    MSK_SPI_CS_TO_OFF = 0xDF
+    MSK_RUN_TO_ON = 0x40
+    MSK_RUN_TO_OFF = 0xBF
+    MSK_MODE_TO_ON = 0x80
+    MSK_MODE_TO_OFF = 0x7F
+    MSK_OUT3B = 0x70
+    MSK_STATE = 0x0F
+    MSK_OUT_CTRL_TO_0 = 0xF8
+    MSK_OUT_CTRL_TO_4 = 0x04
+
+    #Master SPI initial values:  
+    dut.ui_in.value  = MSK_SPI_SCK_TO_ON | MSK_SPI_CS_TO_ON | MSK_SPI_MOSI_TO_ON
+    await ClockCycles(dut.clk, 16)
