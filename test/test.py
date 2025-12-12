@@ -54,7 +54,7 @@ async def test_project(dut):
     #signal_b = LogicArray(MSK_SPI_CS_TO_OFF)  
     #signal_c = LogicArray(MSK_SPI_MOSI_TO_OFF) 
     #word =  dut.ui_in.value & signal_b & signal_c 
-    #dut.ui_in.value = word #
+    dut.ui_in.value = result
     await ClockCycles(dut.clk, 1)
     ###SCK falling edge:
     #dut.ui_in.value = dut.ui_in.value &  MSK_SPI_SCK_TO_OFF
