@@ -7,8 +7,8 @@
 #   Cambios:
 #       - En la funcion Clock(), el parametro "units" cambbia a "unit"
 #       - La operaciones logicas con enteros binarios (bitwise) requieren emplear
-#         el valor en su tipo entero, por ejemplo, dut.signal_a.value.integer en
-#         vez de solo dut.signal_a.value. 
+#         el valor en su tipo entero, por ejemplo, dut.signal_x.value.integer en
+#         vez de solo dut.signal_x.value. 
 #=============================================================================
 # Author: Gerardo A. Laguna S.
 # Universidad Autonoma Metropolitana
@@ -341,7 +341,7 @@ async def test_project(dut):
     expected_c_add = 0x00
     assert dut.uo_out.value == expected_c_add
     expected_op_code = 0x7 #STOP code
-    assert (dut.uio_out.value & MSK_OUT3B)>>4 == expected_op_code
+    assert (dut.uio_out.value.int & MSK_OUT3B)>>4 == expected_op_code
 
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # Write NOP intruction (0x0) in loc 0x01 of CPU space code
@@ -519,7 +519,7 @@ async def test_project(dut):
     expected_c_add = 0x01
     assert dut.uo_out.value == expected_c_add
     expected_op_code = 0x0 #NOP code
-    assert (dut.uio_out.value & MSK_OUT3B)>>4 == expected_op_code
+    assert (dut.uio_out.value.int & MSK_OUT3B)>>4 == expected_op_code
 
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -535,19 +535,19 @@ async def test_project(dut):
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     dut.ui_in.value = dut.ui_in.value.int | MSK_RUN_TO_ON
-    while((dut.uio_out.value & MSK_STATE) == 0):
+    while((dut.uio_out.value.int & MSK_STATE) == 0):
         await ClockCycles(dut.clk, 1)
 
 
     expected_state = 0x1 #Start state
-    assert (dut.uio_out.value & MSK_STATE) == expected_state
+    assert (dut.uio_out.value.int & MSK_STATE) == expected_state
     expected_c_add = 0x00 #First IP
     assert dut.uo_out.value == expected_c_add
     expected_op_code = 0x7 #Programmed STOP code
-    assert (dut.uio_out.value & MSK_OUT3B)>>4 == expected_op_code
+    assert (dut.uio_out.value.int & MSK_OUT3B)>>4 == expected_op_code
 
     dut.ui_in.value = dut.ui_in.value.int &  MSK_RUN_TO_OFF
-    while((dut.uio_out.value & MSK_STATE) != 0):
+    while((dut.uio_out.value.int & MSK_STATE) != 0):
         await ClockCycles(dut.clk, 1)
 
     expected_c_add = 0x01   #Next IP
