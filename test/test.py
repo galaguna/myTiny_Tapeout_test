@@ -19,7 +19,7 @@
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
-from cocotb.types import LogicArray, Logic
+
 
 @cocotb.test()
 async def test_project(dut):
@@ -116,6 +116,7 @@ async def test_project(dut):
     #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # Programing mode (MODE=0) with OUT_CTRL=0 (OUT8B = spi2rom_add, OUT3B=spi2rom_din[2:0])
@@ -168,14 +169,386 @@ async def test_project(dut):
     # Write STOP intruction (0x7) in loc 0x00 of CPU space code
     # SPI command word: 0000000000000111 
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    #SCK period #1:
-    dut.ui_in.value = dut.ui_in.value.int &   MSK_SPI_CS_TO_OFF  &   MSK_SPI_MOSI_TO_OFF
+       #SCK period #1:
+    dut.ui_in.value = dut.ui_in.value.integer &   MSK_SPI_CS_TO_OFF  &   MSK_SPI_MOSI_TO_OFF
     await ClockCycles(dut.clk, 1)
     ###SCK falling edge:
-    dut.ui_in.value = dut.ui_in.value.int &  MSK_SPI_SCK_TO_OFF
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
     await ClockCycles(dut.clk, 4)
     ###SCK rising edge:
-    dut.ui_in.value = dut.ui_in.value.int |  MSK_SPI_SCK_TO_ON
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
     await ClockCycles(dut.clk, 4)
     
+    #SCK period #2:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
 
+    #SCK period #3:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #4:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #5:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #6:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #7:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #8:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #9:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #10:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #11:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #12:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #13:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #14:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_MOSI_TO_ON
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #15:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_MOSI_TO_ON
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #16:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_MOSI_TO_ON
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    ###Last SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    #Master SPI final values:
+    dut.ui_in.value = MSK_SPI_CS_TO_ON  | MSK_SPI_MOSI_TO_ON | MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    await ClockCycles(dut.clk, 16)
+
+    expected_c_add = 0x00
+    assert dut.uo_out.value == expected_c_add
+    expected_op_code = 0x7 #STOP code
+    assert (dut.uio_out.value.integer & MSK_OUT3B)>>4 == expected_op_code
+
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    # Write NOP intruction (0x0) in loc 0x01 of CPU space code
+    # SPI command word: 0000000000010000 
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+       #SCK period #1:
+    dut.ui_in.value = dut.ui_in.value.integer &   MSK_SPI_CS_TO_OFF  &   MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+    
+    #SCK period #2:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #3:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #4:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #5:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #6:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #7:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #8:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #9:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #10:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #11:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #12:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_MOSI_TO_ON
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #13:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #14:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #15:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    #SCK period #16:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_MOSI_TO_OFF
+    await ClockCycles(dut.clk, 1)
+    ###SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    ###SCK rising edge:
+    dut.ui_in.value = dut.ui_in.value.integer |  MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    ###Last SCK falling edge:
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_SPI_SCK_TO_OFF
+    await ClockCycles(dut.clk, 4)
+    #Master SPI final values:
+    dut.ui_in.value = MSK_SPI_CS_TO_ON  | MSK_SPI_MOSI_TO_ON | MSK_SPI_SCK_TO_ON
+    await ClockCycles(dut.clk, 4)
+
+    await ClockCycles(dut.clk, 16)
+
+    expected_c_add = 0x01
+    assert dut.uo_out.value == expected_c_add
+    expected_op_code = 0x0 #NOP code
+    assert (dut.uio_out.value.integer & MSK_OUT3B)>>4 == expected_op_code
+
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    # Execution mode (MODE=1) with OUT_CTRL=4 (OUT8B = IP, OUT3B=OP_CODE)
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    dut.ui_in.value = MSK_MODE_TO_ON | MSK_OUT_CTRL_TO_4
+    await ClockCycles(dut.clk, 16)
+
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    # Run the coded program (Just the STOP instruction)
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    dut.ui_in.value = dut.ui_in.value.integer | MSK_RUN_TO_ON
+    while((dut.uio_out.value.integer & MSK_STATE) == 0):
+        await ClockCycles(dut.clk, 1)
+
+
+    expected_state = 0x1 #Start state
+    assert (dut.uio_out.value.integer & MSK_STATE) == expected_state
+    expected_c_add = 0x00 #First IP
+    assert dut.uo_out.value == expected_c_add
+    expected_op_code = 0x7 #Programmed STOP code
+    assert (dut.uio_out.value.integer & MSK_OUT3B)>>4 == expected_op_code
+
+    dut.ui_in.value = dut.ui_in.value.integer &  MSK_RUN_TO_OFF
+    while((dut.uio_out.value.integer & MSK_STATE) != 0):
+        await ClockCycles(dut.clk, 1)
+
+    expected_c_add = 0x01   #Next IP
+    assert dut.uo_out.value == expected_c_add
