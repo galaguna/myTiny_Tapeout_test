@@ -48,7 +48,7 @@ async def test_project(dut):
     #SCK period #1:
      
     word = dut.ui_in.value 
-    dut.ui_in.value = word & MSK_SPI_CS_TO_OFF & MSK_SPI_MOSI_TO_OFF
+    #dut.ui_in.value = word & MSK_SPI_CS_TO_OFF & MSK_SPI_MOSI_TO_OFF
     await ClockCycles(dut.clk, 1)
     ###SCK falling edge:
     #dut.ui_in.value = dut.ui_in.value &  MSK_SPI_SCK_TO_OFF
